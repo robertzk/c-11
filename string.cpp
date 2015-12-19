@@ -8,6 +8,8 @@ string compose2(const string &a, const string &b, string sep = ":") {
 
 int main(int argc, char** argv) {
   auto str = compose2("foo", "bar");
-  std::cout << compose2("foo", "bar");
+  std::cout << compose2("foo", "bar\n");
+  str.replace(0, 3, "baz");
+  std::cout << str << std::endl;
 }
 
