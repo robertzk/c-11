@@ -8,12 +8,15 @@ const int z = 2 * x;
 class Vector {
 private:
   double *elem;
-  int sz;
+  size_t sz;
 
 public:
 
-  Vector(int s) : elem { new double[s] }, sz { s } { }
-  int size() { return sz; };
+  Vector(unsigned int s) : elem { new double[s] }, sz { s } { }
+  Vector(std::initializer_list<double> lst) : elem { new double[lst.size()] }, sz { lst.size() } {
+    std::copy(lst.begin(), lst.end(), elem);
+  }
+  size_t size() { return sz; };
   double &operator[](int i) { 
     if (i < 0 || size() <= i) {
       throw out_of_range("Out of range on Vector::operation[]");
@@ -30,6 +33,10 @@ int main(int argc, char **argv) {
   } catch (out_of_range) {
     std::cout << "Vector is out of range";
   }
+
+  Vector v2 = {1.0, 5.0, 10.0};
+  std::cout << "\nv2: " << v2[1] << std::endl;
+
 
   for (auto i = 0; i < 10; i++) {
     std::cout << "hi " << i << " " << y << " " << z << std::endl;
