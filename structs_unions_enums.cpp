@@ -64,11 +64,26 @@ Address::Address(const string &n, int nu, const string &s, const string &t,
   }
 }
 
+// Some fun with reinterpret cast on structs
+struct S1 { int a; };
+struct S2 { int a; };
+
+S2 tos2(S1 &a) {
+  return *reinterpret_cast<S2*>(&a);
+}
+
+S2 tos2(S1 &&a) {
+  return *reinterpret_cast<S2*>(&a);
+}
+
 int main(int argc, char **argv) {
   std::cout << "Size of Readout: " << sizeof(Readout) << '\n';   // 8
   std::cout << "Size of Readout2: " << sizeof(Readout2) << '\n'; // 12
 
   Address a { "John Doe", 10, "New Lane", "Cityville", "AL", 6065 };
   std::cout << a << '\n';
+  S1 s1 = S1 { 1 };
+  std::cout << tos2(s1).a << '\n';
+  std::cout << tos2(S1 { 2 }).a << '\n'; // Using rvalue ref
 }
 
