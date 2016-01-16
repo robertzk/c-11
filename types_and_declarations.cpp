@@ -56,9 +56,29 @@ void numeric_literals() {
   long y = 1000000000L;
   long long z = 100000000000000LL;
   unsigned long long w = 1000000000000000ULL;
-  double d = 0.539e-10;
+  double d = 0.539e-10f;
   long double d2 = 0.0539e-15L;
+  double d3 = 0776; // octal
+  double d4 = 0xf00; // hex
 }
+
+void char_literals() {
+  char     c1 =  'f';
+  char16_t c2 = u'u';
+  char32_t c3 = U'l';
+  wchar_t  c4 = L'L';
+}
+
+void string_literals() {
+  const char* s1 = "mess";
+  const char* s2 = R"(what a "mess"!)";
+  const char16_t* s3 = u"UTF-8 mess";
+  const char32_t* s4 = U"UTF-16 mess";
+  const wchar_t* s5  = L"UTF-32 mess";
+  const wchar_t* s5r = LR"(A raw "UTF-32" mess)";
+  const wchar_t* s6  = LR"*^^*(A raw ("UTF-32") mess)*^^*";
+}
+
 
 
 int main(int argc, char **argv) {
