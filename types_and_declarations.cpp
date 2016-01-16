@@ -18,6 +18,19 @@
 #include <atomic>   // Atomics
 */
 
+/* C++'s fundamental types:
+ * boolean (bool)
+ * character (char and wchar_t)
+ * integer (int and long long)
+ * floating point (double and long double)
+ * void 
+ * pointer types (int*)
+ * array types (char[])
+ * reference types (double& and vector<int>&&)
+ * data structures and classes
+ * enumeration (enum and enum class)
+ */
+
 using namespace std;
 
 const int size = 4 * 1024;
