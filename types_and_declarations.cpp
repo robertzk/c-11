@@ -72,11 +72,12 @@ void char_literals() {
 void string_literals() {
   const char* s1 = "mess";
   const char* s2 = R"(what a "mess"!)";
-  const char16_t* s3 = u"UTF-8 mess";
-  const char32_t* s4 = U"UTF-16 mess";
-  const wchar_t* s5  = L"UTF-32 mess";
-  const wchar_t* s5r = LR"(A raw "UTF-32" mess)";
-  const wchar_t* s6  = LR"*^^*(A raw ("UTF-32") mess)*^^*";
+  const char* s3 = u8"UTF-8 mess";
+  const char16_t* s4 = u"UTF-16 mess";
+  const char32_t* s5 = U"UTF-32 mess";
+  const wchar_t* s6  = L"UTF-32 wide mess";
+  const wchar_t* s6r = LR"(A raw "UTF-32" mess)";
+  const wchar_t* s7  = LR"*^^*(A raw ("UTF-32") mess)*^^*";
 }
 
 
