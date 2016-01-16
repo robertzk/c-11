@@ -103,6 +103,21 @@ void limits() {
   std::cout << "\nsize of largest double " << std::numeric_limits<double>::max();
 }
 
+#include <cstdint>
+
+void int_sizes() {
+  int16_t x { 0x0abb}; // 2 bytes
+  int64_t y { 0x00aabbbbccccdddd}; // 8 bytes
+  int_least16_t z; // At least 2 bytes
+  int_least32_t w; // At least 4 bytes
+  int_fast32_t u; // Fastest int type with at least 4 bytes
+}
+
+#include <cstddef>
+
+// The above header defines size_t: A type big enough to
+// hold the size of every object.
+size_t x = sizeof(long long);
 
 int main(int argc, char **argv) {
   bool aboolean { true };
