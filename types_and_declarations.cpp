@@ -96,6 +96,9 @@ void string_literals() {
 #include <limits>
 
 void limits() {
+  std::cout << "\nsize of int " << sizeof(int);
+  std::cout << "\nsize of wchar_t " << sizeof(wchar_t);
+
   std::cout << "\nsize of long " << sizeof(1L);
   std::cout << "\nsize of long long " << sizeof(1LL);
 
@@ -137,12 +140,46 @@ auto ad = alignof(2.0);
 int a[20];
 auto aa = alignof(a); // Alignment of an int
 
+/* The reserved keywords in C++
+ * alignas: Align one type as another for faster access
+ * bitand: Alternative to &
+ * char: Built-in type
+ * constexpr: A compile-time constant
+ * do: Looping structure
+ * extern: Inform the compiler the symbol is defined externally.
+ * if
+ * new
+ * or: Alternative to |
+ * reinterpret_cast: Take a sequence of bytes and re-interpret them
+    as another type. Identical to *static_cast<T*>(static_cast<void*>(&x))
+*/
+
+wchar_t* recast(int &an_int, bool reinterpret = false) {
+  int* ptrint = &an_int;
+  if (reinterpret) {
+    return reinterpret_cast<wchar_t*>(ptrint);
+  } else {
+    return static_cast<wchar_t*>(static_cast<void*>(ptrint));
+  }
+}
+
 int main(int argc, char **argv) {
   bool aboolean { true };
   // page[size + size] = 7; // Undefined!
   digits();
   limits();
-  std::cout << "\nPtr diff: " << static_cast<size_t>(strdiff);
+  std::cout << "\nPtr diff: " << static_cast<size_t>(strdiff) << '\n';
+  
+  static_assert(sizeof(int) == sizeof(wchar_t));
+  int secret_message[6] = { (int)'H', (int)'e', (int)'l', (int)'l', (int)'o', 0 };
+  // Note the address the pointer is pointing to is 
+  // &(*secret_message), whereas the address of the pointer is &secret_message.
+  std::cout << "\nSecret message address: " << &(*secret_message);
+  wchar_t* str = recast(secret_message[0]);
+  std::cout << "\nStr address: " << &(*str) << '\n';
+  // Both of these will print "Hello"
+  std::wcout << str << '\n'; 
+  std::wcout << recast(secret_message[0], true) << '\n';
   return 0;
 }
 
