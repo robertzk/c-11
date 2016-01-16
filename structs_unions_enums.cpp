@@ -26,6 +26,7 @@ struct Address {
 
   Address(const string &n, int nu, const string &s, const string &t,
           const string &st, int z);
+  Address() = default;
 
   // Not sure why returning by reference here causes a segfault.
   const std::string to_s() const {
@@ -50,6 +51,7 @@ Address::Address(const string &n, int nu, const string &s, const string &t,
   ostringstream ss;
   ss << z;
   string zi = string { ss.str() };
+  zi.shrink_to_fit();
 
   switch(zi.length()) {
     case 5:
@@ -80,6 +82,13 @@ int toint(S1 &&a) {
   return *reinterpret_cast<int*>(&a);
 }
 
+#include <type_traits>
+template<typename T>
+void is_a_pod(const T& object, const char* name) {
+  std::cout << name << " is " <<
+    (is_pod<T>::value ? "" : "not ") << "a pod.\n";
+}
+
 int main(int argc, char **argv) {
   std::cout << "Size of Readout: " << sizeof(Readout) << '\n';   // 8
   std::cout << "Size of Readout2: " << sizeof(Readout2) << '\n'; // 12
@@ -90,5 +99,11 @@ int main(int argc, char **argv) {
   std::cout << tos2(s1).a << '\n';
   std::cout << tos2(S1 { 2 }).a << '\n'; // Using rvalue ref
   std::cout << toint(S1 { 3 }) << '\n'; 
+
+  // PODs
+  is_a_pod(int {}, "int");
+  is_a_pod(a, "Address");
+  is_a_pod(Readout {}, "Readout");
+  is_a_pod(new int, "int*");
 }
 
