@@ -38,9 +38,26 @@ char page[size];
 
 void digits() {
   for (auto x : {0, 1, 2, 3, 4}) {
+    // Can use static_cast for simple type conversion on the byte level.
     std::cout << static_cast<char>(65 + x); // ABCDE
   }
 }
+
+// char, unsigned char, and signed char are all distinct!
+void f(char c, signed char sc, unsigned char uc) {
+  //char *pc = &uc;  //error: cannot initialize a variable of type 'char *' with an rvalue of type 'unsigned char *'
+  //signed char *psc = pc; // error
+  //unsigned char *puc = pc; // error
+  //psc = puc; // error: assigning to 'signed char *' from incompatible type 'unsigned char *'
+}
+
+void int_literals() {
+  int x = 1;
+  long y = 1000000000L;
+  long long z = 100000000000000LL;
+  unsigned long long w = 1000000000000000ULL;
+}
+
 
 int main(int argc, char **argv) {
   bool aboolean { true };
