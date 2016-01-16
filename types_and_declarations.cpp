@@ -83,13 +83,32 @@ void string_literals() {
   // using namespace std::string_literals;
   // auto x { "string"s };
 }
- 
+
+/* Guarantees on type size inequalities:
+ * 1 = sizeof(char) <= sizeof(short) <= sizeof(int) <= sizeof(long) <= sizeof(long long)
+ * 1 <= sizeof(bool) <= sizeof(long)
+ * sizeof(char) <= sizeof(wchar_t) <= sizeof(long)
+ * sizeof(float) <= sizeof(double) <= sizeof(long double)
+ * sizeof(N) == sizeof(signed N) == sizeof(unsigned N) // N in char, short, int, long, long long
+ * char at least 8 bits, short at least 16 bits, long at least 32 bits
+*/ 
+
+#include <limits>
+
+void limits() {
+  std::cout << "\nsize of long " << sizeof(1L);
+  std::cout << "\nsize of long long " << sizeof(1LL);
+
+  std::cout << "\nsize of largest float " << std::numeric_limits<float>::max();
+  std::cout << "\nsize of largest double " << std::numeric_limits<double>::max();
+}
 
 
 int main(int argc, char **argv) {
   bool aboolean { true };
   // page[size + size] = 7; // Undefined!
   digits();
+  limits();
   return 0;
 }
 
