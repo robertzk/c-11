@@ -76,6 +76,10 @@ S2 tos2(S1 &&a) {
   return *reinterpret_cast<S2*>(&a);
 }
 
+int toint(S1 &&a) {
+  return *reinterpret_cast<int*>(&a);
+}
+
 int main(int argc, char **argv) {
   std::cout << "Size of Readout: " << sizeof(Readout) << '\n';   // 8
   std::cout << "Size of Readout2: " << sizeof(Readout2) << '\n'; // 12
@@ -85,5 +89,6 @@ int main(int argc, char **argv) {
   S1 s1 = S1 { 1 };
   std::cout << tos2(s1).a << '\n';
   std::cout << tos2(S1 { 2 }).a << '\n'; // Using rvalue ref
+  std::cout << toint(S1 { 3 }) << '\n'; 
 }
 
