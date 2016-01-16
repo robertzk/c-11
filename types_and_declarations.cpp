@@ -51,11 +51,13 @@ void f(char c, signed char sc, unsigned char uc) {
   //psc = puc; // error: assigning to 'signed char *' from incompatible type 'unsigned char *'
 }
 
-void int_literals() {
+void numeric_literals() {
   int x = 1;
   long y = 1000000000L;
   long long z = 100000000000000LL;
   unsigned long long w = 1000000000000000ULL;
+  double d = 0.539e-10;
+  long double d2 = 0.0539e-15L;
 }
 
 
