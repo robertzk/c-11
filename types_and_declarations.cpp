@@ -118,12 +118,15 @@ void int_sizes() {
 // The above header defines size_t: A type big enough to
 // hold the size of every object.
 size_t x = sizeof(long long);
+char str[6] = "fooba";
+ptrdiff_t strdiff = &str[5] - &str[0];
 
 int main(int argc, char **argv) {
   bool aboolean { true };
   // page[size + size] = 7; // Undefined!
   digits();
   limits();
+  std::cout << "\nPtr diff: " << static_cast<size_t>(strdiff);
   return 0;
 }
 
