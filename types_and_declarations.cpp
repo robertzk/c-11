@@ -148,10 +148,97 @@ auto aa = alignof(a); // Alignment of an int
  * do: Looping structure
  * extern: Inform the compiler the symbol is defined externally.
  * if
- * new
- * or: Alternative to |
+ * new: Allocate memory on the free store.
+ * or: Alternative to ||
  * reinterpret_cast: Take a sequence of bytes and re-interpret them
     as another type. Identical to *static_cast<T*>(static_cast<void*>(&x))
+ * static_assert: Perform a compile-time assertion.
+ * thread_local: Something thread-local is brought into existence during
+    thread creation and disposed of when the thread stops 
+    // http://stackoverflow.com/questions/11983875/what-does-the-thread-local-mean-in-c11
+ * typename: A component of template declarations.
+ * volatile: The memory referenced by this variable can be modified by
+    an external process.
+ * alignof: Alignment of a type.
+ * bitor: Equivalent to |
+ * char16_t: Built-in type
+ * const_cast: Turn a non-const type into a const type, declaring immutability
+ * double: Built-in type
+ * false
+ * inline: Unrolls calls to this function in the underlying assembly.
+     Should only be used for very small functions.
+ * noexcept: The noexcept operator performs a compile-time check
+    that returns true if an expression is declared to not throw any exceptions.
+ * or_eq: alternative to |=
+ * return
+ * static_cast: Conversion using implicit and user-defined methods.
+   // http://en.cppreference.com/w/cpp/language/static_cast
+ * throw: Throw an exception to be caught by catch.
+ * union: Construct a union type
+ * wchar_t: Built in type
+ * and: Alternative to &&
+ * bool
+ * char32_t
+ * continue: Continue a loop.
+ * dynamic_cast: Safely converts pointers and references to classes up,
+    down, and sideways along the inheritance hierarchy.
+    // http://en.cppreference.com/w/cpp/language/dynamic_cast
+ * float
+ * int
+ * not: Alternative to !
+ * private: Class ownership marker
+ * short
+ * struct
+ * true
+ * unsigned: Type modifier
+ * while: Looping
+ * and_eq: Alternative to &=
+ * break: Step out of a loop or switch
+ * class: Declare a class
+ * decltype: The declaration type of an expression. Useful for
+    templating.
+ * else
+ * for
+ * long
+ * not_eq: Equivalent to !=
+ * protected: Class ownership market (only referencable by objects
+    of same class or subclass).
+ * signed: Type modifier
+ * switch: Multiple if statement
+ * try: Begin a block that may throw an exception
+ * using: Use a namespace or declare a namespace alias.   
+ * xor: Alternative to ^
+ * asm: Inline assembly code
+ * case: Component of switch statement
+ * compl: Alternative to ~
+ * default: Default code path for switch statement
+ * enum: Enumerated type
+ * friend: Operator that belongs to a class
+ * mutable: applies to non-static class members of non-reference
+    non-const type and specifies that the member does not affect the externally visible state of the class
+    // http://en.cppreference.com/w/cpp/language/cv
+ * nullptr: The best way to mark null pointers (no object).
+ * public: Class ownership world-visible marker.
+ * sizeof: Built-in size extraction operator (use size_t to hold result).
+ * template: Templating.
+ * typedef: Alias one type as another name.
+ * virtual: May be implemented by a subclass. (If = 0, pure virtual and must be)
+ * xor_eq: ^= 
+ * auto: Type inference keyword
+ * catch: Catch an exception in a try block
+ * const: Many uses, but often to do with scope immutability assumptions
+ * delete: delete memory on the free store allocated by new 
+ * explicit: Never perform implicit type coercion on a function argument.
+ * goto: Go to a labeled statement.
+ * namespace: Declare a namespace.
+ * operator: Define or overload an operator.
+ * register: Refer to a specific register in the hardware.
+ * static: Within functions, modifiable across multiple calls and retains state.
+     For class methods, not part of objects but of class.
+ * this: Reference pointer to current object in a class method.
+ * typeid: Used where the dynamic type of a polymorphic object must be known and for static type identification.
+     // http://en.cppreference.com/w/cpp/language/typeid
+ * void: The empty type, only usable as pointer or function return type.
 */
 
 wchar_t* recast(int &an_int, bool reinterpret = false) {
