@@ -121,6 +121,22 @@ size_t x = sizeof(long long);
 char str[6] = "fooba";
 ptrdiff_t strdiff = &str[5] - &str[0];
 
+// https://en.wikipedia.org/wiki/Data_structure_alignment
+/* Data structure alignment is the way data is arranged and accessed in computer memory.
+ * It consists of two separate but related issues: data alignment and data structure padding.
+ * When a modern computer reads from or writes to a memory address,
+ * it will do this in word sized chunks (e.g. 4 byte chunks on a 32-bit system) or larger.
+ * Data alignment means putting the data at a memory address equal to some
+ * multiple of the word size, which increases the system's performance due to the way the
+ * CPU handles memory. To align the data, it may be necessary to insert some meaningless
+ * bytes between the end of the last data structure and the start of the next,
+ * which is data structure padding. */
+auto c  = alignof('c');
+auto ai = alignof(1);
+auto ad = alignof(2.0);
+int a[20];
+auto aa = alignof(a); // Alignment of an int
+
 int main(int argc, char **argv) {
   bool aboolean { true };
   // page[size + size] = 7; // Undefined!
