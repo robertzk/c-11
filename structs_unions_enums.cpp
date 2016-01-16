@@ -82,12 +82,36 @@ int toint(S1 &&a) {
   return *reinterpret_cast<int*>(&a);
 }
 
+// PODs https://en.wikipedia.org/wiki/Passive_data_structure
 #include <type_traits>
 template<typename T>
 void is_a_pod(const T& object, const char* name) {
   std::cout << name << " is " <<
     (is_pod<T>::value ? "" : "not ") << "a pod.\n";
 }
+
+// Bit fields
+struct BitFieldCompact {
+  bool bit1 : 1;
+  bool bit2 : 1;
+  bool bit3 : 1;
+  bool bit4 : 1;
+  bool bit5 : 1;
+  bool bit6 : 1;
+  bool bit7 : 1;
+  bool bit8 : 1;
+};
+
+struct BitField {
+  bool bit1;
+  bool bit2;
+  bool bit3;
+  bool bit4;
+  bool bit5;
+  bool bit6;
+  bool bit7;
+  bool bit8;
+};
 
 int main(int argc, char **argv) {
   std::cout << "Size of Readout: " << sizeof(Readout) << '\n';   // 8
@@ -105,5 +129,11 @@ int main(int argc, char **argv) {
   is_a_pod(a, "Address");
   is_a_pod(Readout {}, "Readout");
   is_a_pod(new int, "int*");
+
+  // Bit fields
+  BitFieldCompact b1 = { true, false, true, false, true, false, true, true };
+  BitField b2 = { true, false, true, false, true, false, true, true };
+  std::cout << "BitFieldCompact has size " << sizeof(b1) << '\n';
+  std::cout << "BitField has size " << sizeof(b2) << '\n';
 }
 
