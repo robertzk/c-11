@@ -32,7 +32,13 @@ struct Address {
     return (boost::format("%s lives at %d %s, %s %s %s") %
       name % number % street % town % state % zip).str();
   }
+  
+  friend ostream& operator<<(ostream &, Address);
 };
+
+ostream& operator<<(ostream &os, Address a) {
+  return os << a.to_s();
+}
 
 Address::Address(const string &n, int nu, const string &s, const string &t,
                  const string &st, int z) : name(n), number(nu), street(s), town(t) {
@@ -63,6 +69,6 @@ int main(int argc, char **argv) {
   std::cout << "Size of Readout2: " << sizeof(Readout2) << '\n'; // 12
 
   Address a { "John Doe", 10, "New Lane", "Cityville", "AL", 6065 };
-  std::cout << a.to_s() << std::endl;
+  std::cout << a << '\n';
 }
 
