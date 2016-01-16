@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 /* Other headers
 #include <cstddef>  // types
@@ -31,7 +32,6 @@
  * enumeration (enum and enum class)
  */
 
-using namespace std;
 
 const int size = 4 * 1024;
 char page[size];
@@ -78,8 +78,12 @@ void string_literals() {
   const wchar_t* s6  = L"UTF-32 wide mess";
   const wchar_t* s6r = LR"(A raw "UTF-32" mess)";
   const wchar_t* s7  = LR"*^^*(A raw ("UTF-32") mess)*^^*";
-}
 
+  // Couldn't get this to work...
+  // using namespace std::string_literals;
+  // auto x { "string"s };
+}
+ 
 
 
 int main(int argc, char **argv) {
