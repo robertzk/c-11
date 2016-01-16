@@ -38,14 +38,14 @@ char page[size];
 
 void digits() {
   for (auto x : {0, 1, 2, 3, 4}) {
-    std::cout << static_cast<char>(65 + x); // ABCDE
+    std::cout << static_cast<char>(60 + x);
   }
 }
 
 int main(int argc, char **argv) {
   bool aboolean { true };
   // page[size + size] = 7; // Undefined!
-  digits();
+  // digits()
   return 0;
 }
 
