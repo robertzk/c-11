@@ -113,6 +113,67 @@ struct BitField {
   bool bit8;
 };
 
+// Anonymous unions
+class Entry2 {
+private:
+  enum class Tag { number, text };    
+  Tag type;
+
+  union {
+    int i;
+    string s;
+  };
+
+public:
+  struct Bad_entry {};
+  string name;
+  ~Entry2();
+  Entry2& operator=(const Entry2&);
+  Entry2(const Entry2&);
+
+  int number() const;
+  string text() const;
+
+  void set_number(int n);
+  void set_text(const string&);
+};
+
+int Entry2::number() const {
+  if (type != Tag::number) throw Bad_entry {};
+  return i;
+}
+
+std::string Entry2::text() const {
+  if (type != Tag::text) throw Bad_entry {};
+  return s;
+}
+
+void Entry2::set_number(int n) {
+  if (type == Tag::text) {
+    s.~string();
+    type = Tag::number;
+  }
+  i = n;
+}
+
+void Entry2::set_text(const string &ss) {
+  if (type == Tag::text) {
+    s = ss;
+    type = Tag::number;
+  } else {
+    new(&s) string { ss };
+    type = Tag::text;
+  }
+}
+
+/*
+Entry2& Entry2::operator(const Entry2 &e) {
+  if (type == Tag::text && e.type == Tag::text) {
+    s = e.s;
+  }
+}
+*/
+
 int main(int argc, char **argv) {
   std::cout << "Size of Readout: " << sizeof(Readout) << '\n';   // 8
   std::cout << "Size of Readout2: " << sizeof(Readout2) << '\n'; // 12
@@ -135,5 +196,12 @@ int main(int argc, char **argv) {
   BitField b2 = { true, false, true, false, true, false, true, true };
   std::cout << "BitFieldCompact has size " << sizeof(b1) << '\n';
   std::cout << "BitField has size " << sizeof(b2) << '\n';
+  // This will error: Not possible to get address of a bit field.
+  // std::cout << "BitField has size " << &b1.bit2 << '\n'; 
+  
+  // Using anonymous unions
+  //Entry2 e;
+  //e.set_number(1);
+  //e.set_text("foo");
 }
 
